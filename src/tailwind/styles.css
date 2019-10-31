@@ -1,0 +1,46 @@
+@tailwind base;
+@tailwind utilities;
+@tailwind components;
+
+html,
+body {
+  @apply w-full;
+  @apply h-full;
+  @apply bg-indigo-500;
+}
+
+.btn {
+  @apply px-4;
+  @apply py-3;
+  @apply text-center;
+  @apply w-full;
+  @apply bg-indigo-500;
+  @apply text-white;
+  @apply rounded;
+  @apply shadow;
+}
+
+.btn:disabled {
+  @apply bg-indigo-400;
+  @apply text-indigo-100;
+}
+
+#phone-form-control {
+  @apply px-4;
+  @apply py-2;
+  @apply w-full;
+  @apply outline-none;
+  @apply border;
+  @apply rounded;
+
+  @apply text-lg;
+  @apply mb-2;
+}
+
+#phone-form-control:focus {
+  @apply shadow-outline;
+}
+
+.form-input {
+  @apply text-lg;
+}
