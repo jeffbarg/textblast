@@ -16,12 +16,12 @@ function AuthProvider(props) {
 
     if (profile.itemId === undefined) {
       return userbase
-        .insert("profile", newProfile.item)
+        .insertItem({ databaseName: "profile", item: newProfile.item })
         .then(() => {})
         .catch(onError);
     } else {
       return userbase
-        .update("profile", newProfile.item, profile.itemId)
+        .updateItem({ databaseName: "profile", item: newProfile.item, itemId: profile.itemId })
         .then(() => {})
         .catch(onError);
     }
@@ -36,13 +36,13 @@ function AuthProvider(props) {
 
   useEffect(() => {
     userbase
-      .signInWithSession()
+      .init({ appId: "7109ab3e-b57a-43dc-ac65-d313e94ca902" })
       .then(session => {
         if (session.user) {
           // there is a valid active session
           setUser(session.user);
           // Now open user profile
-          return userbase.openDatabase("profile", profileChangeHandler);
+          return userbase.openDatabase({ databaseName: "profile", changeHandler: profileChangeHandler });
         }
         return Promise.reject();
       })
@@ -62,7 +62,7 @@ function AuthProvider(props) {
   let data = { user, profile: profile };
   const login = (username, password, setError = undefined) => {
     return userbase
-      .signIn(username, password)
+      .signIn({ username, password })
       .then(user => {
         setUser(user);
       })
@@ -75,7 +75,7 @@ function AuthProvider(props) {
   }; // make a login request
   const signup = (username, password, setError = undefined) => {
     return userbase
-      .signUp(username, password)
+      .signUp({ username, email: username, password })
       .then(user => {
         console.log(user);
         setUser(user);

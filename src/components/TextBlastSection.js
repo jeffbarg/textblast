@@ -14,34 +14,34 @@ export default () => {
     setPeople(items);
   };
   useEffect(() => {
-    userbase.openDatabase(PEOPLE_DATABASE_NAME, handleDatabaseChange).catch(e => setError(e));
+    userbase.openDatabase({ databaseName: PEOPLE_DATABASE_NAME, changeHandler: handleDatabaseChange }).catch(e => setError(e));
   }, []);
 
   return (
-    <div className="mb-2 w-full flex flex-col">
-      {error && <div className="mb-2 bg-red-500 shadow rounded text-white w-full p-3 text-lg">{error.message}</div>}
+    <div className="flex flex-col w-full mb-2">
+      {error && <div className="w-full p-3 mb-2 text-lg text-white bg-red-500 rounded shadow">{error.message}</div>}
 
       {/* Add Person Form */}
-      <h1 className="mb-2 w-full bg-blue-400 border border-blue-800 text-white rounded shadow-md py-3 px-4">
+      <h1 className="w-full px-4 py-3 mb-2 text-white bg-blue-400 border border-blue-800 rounded shadow-md">
         <span className="font-bold">1.</span> Add People
       </h1>
-      <div className="w-full bg-gray-100 rounded shadow-md p-3 mb-4">
+      <div className="w-full p-3 mb-4 bg-gray-100 rounded shadow-md">
         <AddPersonForm setPeople={setPeople} />
       </div>
 
       {/* People List */}
-      <h1 className="mb-2 w-full bg-blue-400 border border-blue-800 text-white rounded shadow-md py-3 px-4">
+      <h1 className="w-full px-4 py-3 mb-2 text-white bg-blue-400 border border-blue-800 rounded shadow-md">
         <span className="font-bold">2.</span> Select Recipients
       </h1>
-      <div className="w-full bg-gray-100 rounded shadow-md p-3 mb-4">
+      <div className="w-full p-3 mb-4 bg-gray-100 rounded shadow-md">
         <PeopleList people={people} setPeople={setPeople} />
       </div>
 
       {/* Send Message */}
-      <h1 className="mb-2 w-full bg-blue-400 border border-blue-800 text-white rounded shadow-md py-3 px-4">
+      <h1 className="w-full px-4 py-3 mb-2 text-white bg-blue-400 border border-blue-800 rounded shadow-md">
         <span className="font-bold">3.</span> Send Message
       </h1>
-      <div className="w-full bg-gray-100 rounded shadow-md p-3 mb-4">
+      <div className="w-full p-3 mb-4 bg-gray-100 rounded shadow-md">
         <SendMessageForm people={people} />
       </div>
     </div>

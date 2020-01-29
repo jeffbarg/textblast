@@ -6,10 +6,6 @@ import AppProviders from "./context";
 
 import * as serviceWorker from "./serviceWorker";
 
-import userbase from "userbase-js";
-
-userbase.configure({ appId: "1b4180a1-49f5-405d-a6f9-6c2df3ce997d" });
-
 ReactDOM.render(
   <AppProviders>
     <App />

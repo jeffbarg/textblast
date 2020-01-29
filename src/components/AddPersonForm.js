@@ -20,7 +20,7 @@ export default ({ setPeople }) => {
       return;
     }
     userbase
-      .insert(PEOPLE_DATABASE_NAME, { name, number })
+      .insertItem({ databaseName: PEOPLE_DATABASE_NAME, item: { name, number } })
       .then(() => {
         setNumber("");
         setName("");
@@ -37,10 +37,10 @@ export default ({ setPeople }) => {
       className="py-2 mb-1"
     >
       <div className="sm:flex sm:mb-2">
-        <label className="block w-full sm:w-1/2 mb-1 sm:mb-0 sm:mr-2">
-          <span className="text-gray-700 text-sm uppercase font-bold mb-1">Name</span>
+        <label className="block w-full mb-1 sm:w-1/2 sm:mb-0 sm:mr-2">
+          <span className="mb-1 text-sm font-bold text-gray-700 uppercase">Name</span>
           <input
-            className="text-black w-full form-input"
+            className="w-full text-black form-input"
             id="form-name"
             name="name"
             type="text"
@@ -50,15 +50,15 @@ export default ({ setPeople }) => {
           />
         </label>
         <label className="block w-full sm:w-1/2">
-          <span className="text-gray-700 text-sm uppercase font-bold mb-1">Phone #</span>
+          <span className="mb-1 text-sm font-bold text-gray-700 uppercase">Phone #</span>
           <PhoneInput disableCountryCode defaultCountry={"us"} onlyCountries={["us"]} value={number} onChange={setNumber} placeholder="Phone Number" />
         </label>
       </div>
       {error && (
-        <div className="mb-2 py-3 px-4 bg-red-400 text-white text-semibold  rounded border border-red-600 flex items-center justify-between">
+        <div className="flex items-center justify-between px-4 py-3 mb-2 text-white bg-red-400 border border-red-600 rounded text-semibold">
           <span>{error.message}</span>
           <button className="focus:outline-none" onClick={() => setError(null)}>
-            <img alt="Cancel" className="h-4 w-4" src={cancelIcon} />
+            <img alt="Cancel" className="w-4 h-4" src={cancelIcon} />
           </button>
         </div>
       )}
